@@ -34,8 +34,7 @@ app.use(session({ secret: config.sessionSecret, resave: false, saveUninitialized
 }))
 app.use(cors({
     origin: [
-        'localhost:8080',
-        'locahost:8081',
+        'http://localhost:8080',
         'https://somehow-i-manage.herokuapp.com'
     ],
     credentials: true
