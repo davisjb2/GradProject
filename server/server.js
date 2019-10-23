@@ -36,7 +36,7 @@ app.use(cors({
     origin: [
         'localhost:8080',
         'locahost:8081',
-        'https://murmuring-atoll-93655.herokuapp.com/'
+        'https://somehow-i-manage.herokuapp.com'
     ],
     credentials: true
 }))
