@@ -16,9 +16,9 @@ const TaskModel = (sequelize, DataTypes) => {
             type: DataTypes.BOOLEAN,
             defaultValue: false
         },
-        lane: {
-            type: DataTypes.INTEGER,
-            defaultValue: 0
+        assignedDate: {
+            type: DataTypes.DATE,
+            defaultValue: undefined
         }
     }, {
         sequelize,

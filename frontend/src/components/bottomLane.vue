@@ -1,5 +1,5 @@
 <template>
-    <div class="">
+    <div class="horizontal">
         <h4>{{ title }}</h4>
         <div>
             <draggable class="lane-body card-list" v-model="taskData" :options="{ group: 'default' }" @change="doChange">
@@ -16,7 +16,7 @@ import { mapGetters, mapActions } from 'vuex'
 import draggable from 'vuedraggable'
 import card from './card'
 export default {
-  name: 'lane',
+  name: 'bottomLane',
   data() {
         return {
             taskData: []
@@ -35,7 +35,7 @@ export default {
       doChange (evt) {
          if(evt.added) {
             const data = evt.added.element
-            data.assignedDate= new Date(this.id)
+            data.assignedDate= null
             this.updateTask(data)
                 .then(() => {
                 }).catch((e) => {
@@ -52,28 +52,18 @@ export default {
   },
   watch: {
     getTasks() {
-        this.taskData = JSON.parse(JSON.stringify(this.getTasks)).filter(el => 
-            {
-                return new Date(el.assignedDate).setHours(0,0,0,0) === new Date(this.id).setHours(0,0,0,0)
-            })
+        this.taskData = JSON.parse(JSON.stringify(this.getTasks)).filter(el => el.assignedDate == undefined)
     }
   },
   mounted () { 
       this.loadTasks().then(() => {
-        this.taskData = JSON.parse(JSON.stringify(this.getTasks)).filter(el => 
-            {
-                return new Date(el.assignedDate).setHours(0,0,0,0) === new Date(this.id).setHours(0,0,0,0)
-            })
+        this.taskData = JSON.parse(JSON.stringify(this.getTasks)).filter(el => el.assignedDate == undefined)
       })
    }
 }
 </script>
 
 <style scoped>
-.lane-body {
-    min-height: 45vh;
-}
-
 .card-list {
   width: 100%;
   background: white;
@@ -82,7 +72,12 @@ export default {
   margin: 0 auto;
   background: #E2E4E6;
   box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, 0.65);
-  margin-bottom: 25px;
+  margin-bottom: 200px;
+  min-height:15vh;
+}
+
+.horizontal {  
+  width: 85vw;
 }
 
 @media (max-width: 700px) {

@@ -35,7 +35,7 @@ export default {
         name: '',
         completed: false,
         dueDate: new Date(),
-        lane: 0
+        assignedDate: undefined
       }
     }
   },
