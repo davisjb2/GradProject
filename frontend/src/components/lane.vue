@@ -1,8 +1,9 @@
 <template>
-    <div class="">
+    <div>
         <h4>{{ title }}</h4>
-        <div>
-            <draggable class="lane-body card-list" v-model="taskData" :options="{ group: 'default' }" @change="doChange">
+        <div class="lane-body card-list">
+            <h4 class="datenum">{{ num }}</h4>
+            <draggable class="lane-body" v-model="taskData" :options="{ group: 'default' }" @change="doChange">
                 <div v-for="task in taskData" :key="task.id">
                     <card :task="task"></card>
                 </div>
@@ -22,7 +23,7 @@ export default {
             taskData: []
         }
   },
-  props: [ 'id', 'title' ],
+  props: [ 'id', 'title', 'num' ],
   components: {
       draggable,
       card
@@ -71,7 +72,7 @@ export default {
 
 <style scoped>
 .lane-body {
-    min-height: 45vh;
+    min-height: 35vh;
 }
 
 .card-list {
@@ -81,8 +82,8 @@ export default {
   border-radius: 7px;
   margin: 0 auto;
   background: #E2E4E6;
-  box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, 0.65);
-  margin-bottom: 25px;
+  box-shadow: 2px 1px 2px 0px rgba(0, 0, 0, 0.65);
+  margin-bottom: 20px;
 }
 
 @media (max-width: 700px) {
@@ -94,5 +95,10 @@ export default {
 
 h4 {
     font-size: 13.5px
+}
+
+.datenum {
+    text-align: left;
+    padding-left: 8px;
 }
 </style>

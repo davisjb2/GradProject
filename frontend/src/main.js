@@ -13,9 +13,21 @@ Vue.use(Buefy)
 
 Vue.config.productionTip = false
 
+Vue.filter('formatDateDay', function (value) {
+  if (value) {
+    return (new Date(value)).toLocaleString('en-US',{ weekday: 'short' })
+  }
+})
+
 Vue.filter('formatDate', function (value) {
   if (value) {
-    return (new Date(value)).toLocaleString('en-US',{ weekday: 'short', month: 'short', day: 'numeric' })
+    return (new Date(value)).toLocaleString('en-US',{ year: "numeric", month: "2-digit", day: "numeric" })
+  }
+})
+
+Vue.filter('formatDateNum', function (value) {
+  if (value) {
+    return (new Date(value)).toLocaleString('en-US',{ day: 'numeric' })
   }
 })
 

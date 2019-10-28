@@ -1,14 +1,17 @@
 <template>
     <div class="section">
         <div class="container">
-            <h1 class="title">Moving Tasks</h1>
+            <h1 class="title">{{ dates[0] | formatDate }} - {{ dates[dates.length - 1] | formatDate }}</h1>
             <div class="columns">
                 <div class="column" v-for="(date, i) in dates" :key="i">
-                    <lane :id="date" :title="date | formatDate"></lane>
+                    <lane :id="date" :num="date | formatDateNum" :title="date | formatDateDay"></lane>
                 </div>
             </div>
             <div class="level">
-                <bottomLane id="0" title="Unassigned"></bottomLane>
+                <bottomLane id="0" title="Unassigned Tasks"></bottomLane>
+            </div>
+            <div class="level">
+                <bottomLane id="1" title="Missed Tasks"></bottomLane>
             </div>
         </div>        
         
@@ -41,5 +44,12 @@ export default {
 </script>
 
 <style scoped>
-
+.title {
+    width: 100%;
+    background: white;
+    border: 1px solid #E2E4E6;
+    border-radius: 7px;
+    background: #E2E4E6;
+    box-shadow: 2px 1px 2px 0px rgba(0, 0, 0, 0.65);
+}
 </style>

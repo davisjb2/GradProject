@@ -52,12 +52,30 @@ export default {
   },
   watch: {
     getTasks() {
-        this.taskData = JSON.parse(JSON.stringify(this.getTasks)).filter(el => el.assignedDate == undefined)
+        this.taskData = JSON.parse(JSON.stringify(this.getTasks)).filter((el) => 
+          {
+            if(this.id == 0)
+            {
+              return el.assignedDate == undefined
+            } else
+            {
+              return el.assignedDate != undefined && (new Date(el.assignedDate)).setHours(0,0,0,0) < (new Date()).setHours(0,0,0,0)
+            }
+          })
     }
   },
   mounted () { 
       this.loadTasks().then(() => {
-        this.taskData = JSON.parse(JSON.stringify(this.getTasks)).filter(el => el.assignedDate == undefined)
+        this.taskData = JSON.parse(JSON.stringify(this.getTasks)).filter((el) => 
+          {
+            if(this.id == 0)
+            {
+              return el.assignedDate == undefined
+            } else
+            {
+              return el.assignedDate != undefined && (new Date(el.assignedDate)).setHours(0,0,0,0) < (new Date()).setHours(0,0,0,0)
+            }
+          })
       })
    }
 }
@@ -71,9 +89,9 @@ export default {
   border-radius: 7px;
   margin: 0 auto;
   background: #E2E4E6;
-  box-shadow: 3px 3px 3px 0px rgba(0, 0, 0, 0.65);
-  margin-bottom: 200px;
-  min-height:15vh;
+  box-shadow: 2px 1px 2px 0px rgba(0, 0, 0, 0.65);
+  margin-bottom: 5px;
+  min-height:10vh;
 }
 
 .horizontal {  
@@ -88,6 +106,9 @@ export default {
 }
 
 h4 {
-    font-size: 13.5px
+    font-size: 20px;
+    text-align: left;
+    padding-left: 5px;
+    font-weight: 700;
 }
 </style>

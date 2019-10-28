@@ -24,7 +24,8 @@ export default {
   margin: 2%;
   border-bottom: 1px solid #ccc;
   cursor: pointer;
-  text-align:left
+  text-align:left;
+  border-radius: 6px;
 }
 
 .task-card h3 {
