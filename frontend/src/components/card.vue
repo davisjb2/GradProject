@@ -1,20 +1,52 @@
 <template>
-    <div class="task-card">
+  <div>
+    <div class="task-card" @click="edit">
         <div class="task-container">
             <h3>
                 {{ task.name }}
             </h3>
-            <small>{{ new Date(task.dueDate).toLocaleDateString("en-US") }}</small>
+            <small>{{ task.dueDate | formatDate }}</small>
         </div>
     </div>
+
+    <b-modal :active.sync="modalEditActive" has-modal-card>
+        <edit-task v-bind="formProps"></edit-task>
+    </b-modal>  
+  </div>  
 </template>
 
 <script>
+import editTask from '../components/editTask'
 export default {
   name: 'card',
   props: [
       'task'
-  ]
+  ],
+  data() {
+            return {
+                modalActive: false,
+                modalEditActive: false,
+                formProps: {
+                    task: {
+                        id: 0,
+                        dueDate: '',
+                        name: '',
+                        completed: false
+                    }                    
+                }
+            }
+  },
+  components: {
+    editTask
+  },
+  methods: {
+    edit(res) {
+        console.log(res)
+        this.formProps.task = this.task;
+        this.formProps.task.dueDate = new Date(this.formProps.task.dueDate)
+        this.modalEditActive = true;
+    }
+  }
 }
 </script>
 
