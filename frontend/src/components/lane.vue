@@ -82,7 +82,7 @@ export default {
   border-radius: 7px;
   margin: 0 auto;
   background: #E2E4E6;
-  box-shadow: 2px 1px 2px 0px rgba(0, 0, 0, 0.65);
+  box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.65);
   margin-bottom: 20px;
 }
 
