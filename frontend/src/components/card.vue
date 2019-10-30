@@ -24,7 +24,6 @@ export default {
   ],
   data() {
             return {
-                modalActive: false,
                 modalEditActive: false,
                 formProps: {
                     task: {
@@ -53,7 +52,7 @@ export default {
 <style>
 .task-card {
   background-color: white;
-  margin: 2%;
+  margin: 3%;
   border-bottom: 1px solid #ccc;
   cursor: pointer;
   text-align:left;
