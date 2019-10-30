@@ -1,8 +1,5 @@
 <template>
-    <div class="modal-card" style="width: auto">
-        <header class="modal-card-head">
-            <p class="modal-card-title">Edit Task</p>
-        </header>
+    <div class="modal-card">
         <section class="modal-card-body">
             <b-field label="Name" label-position="on-border">
                 <b-input
@@ -19,8 +16,7 @@
             <b-checkbox v-model="task.completed">Completed?</b-checkbox>
         </section>
         <footer class="modal-card-foot">
-            <button class="button" type="button" @click="$parent.close()">Close</button>
-            <button class="button is-primary" @click="edit">Edit</button>
+            <button class="button" type="button" @click="edit">Close</button>
         </footer>
     </div>
 </template>
@@ -50,4 +46,9 @@ export default {
 
 
 <style scoped>
+.modal-card {
+    width:30vw;
+    height:50vh;
+    border-radius: 8px;
+}
 </style>
