@@ -4,7 +4,7 @@
         <template slot="brand">
             <b-navbar-item tag="router-link" :to="{ path: '/' }">
                 <img
-                    src="./assets/logo.png"
+                    src="./assets/logo2.png"
                 >
             </b-navbar-item>
         </template>
@@ -101,19 +101,33 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin-top: 0px;
 }
 
 .diff-button {
   background: none !important;
-  color: black !important;
+  color: white !important;
   border: none !important;
+}
+
+.navbar {
+  padding: 10px 20px 10px 20px;
+  background-color: #2969a7;
+  color: white;
+}
+
+.navbar-item {
+  padding: 0 0 0 0;
+}
+
+.navbar-item img {
+  max-height: 5rem;
 }
 </style>
