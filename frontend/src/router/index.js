@@ -1,13 +1,11 @@
 import Router from 'vue-router'
 import Vue from 'vue'
 import home from '@/components/home'
-import dashboard from '@/components/dashboard'
 import login from '@/components/login'
 import logout from '@/components/logout'
 import register from '@/components/register'
 import account from '@/components/account'
 import checkAuth from '../common/checkAuth'
-import tasks from '@/components/tasks'
 import tasksMove from '@/components/tasksMove'
 
 Vue.use(Router)
@@ -23,7 +21,7 @@ const router = new Router({
         {
             path: '/dashboard',
             name: 'dashboard',
-            component: dashboard
+            component: tasksMove
         },
         {
             path: '/login',
@@ -44,16 +42,6 @@ const router = new Router({
             path: '/account',
             name: 'account',
             component: account
-        },
-        {
-            path: '/tasks',
-            name: 'tasks',
-            component: tasks
-        },
-        {
-            path: '/tasksMove',
-            name: 'tasksMove',
-            component: tasksMove
         }
     ]
 })

@@ -16,13 +16,7 @@
                     </button>
                     <button v-if="loggedIn" @click="goRouter('dashboard')" class="button is-info diff-button">
                         Dashboard
-                    </button>
-                    <button v-if="loggedIn" @click="goRouter('tasks')" class="button is-light diff-button">
-                        Tasks
-                    </button>
-                    <button v-if="loggedIn" @click="goRouter('tasksMove')" class="button is-light diff-button">
-                        Tasks Move
-                    </button>                                         
+                    </button>                                      
                     <button v-if="loggedIn" @click="goRouter('account')" class="button is-light diff-button">
                         Account
                     </button>                    
