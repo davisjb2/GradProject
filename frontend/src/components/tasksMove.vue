@@ -1,14 +1,25 @@
 <template>
-    <div class="section">
         <div class="container">
-            <div class="columns headerBox">
+            <div class="hero is-primary">
+                <div class="hero-body columns">
                 <div class="column" style="text-align:left">
                     <b-button tag="input" class="button is-info" value="Create New Task" @click="create"/> 
                 </div>
                 <div class="column">
-                    <h1 class="title">{{ dates[0] | formatDate }} - {{ dates[dates.length - 1] | formatDate }}</h1>
+                    <div class="columns">
+                        <div class="column">
+                            <a href="" style="color:white"><font-awesome-icon icon="angle-left" size="2x" @click="prevWeek"/></a>
+                        </div>                        
+                        <div class="column">
+                            <h1 class="title" style="white-space: nowrap">{{ dates[0] | formatDate }} - {{ dates[dates.length - 1] | formatDate }}</h1>
+                        </div>
+                        <div class="column">
+                            <a href="" style="color:white"><font-awesome-icon icon="angle-right" size="2x" @click="nextWeek"/></a>
+                        </div>
+                    </div>
                 </div>
                 <div class="column"></div>
+                </div>
             </div>
             <div class="columns">
                 <div class="column" v-for="(date, i) in dates" :key="i">
@@ -25,8 +36,6 @@
             <create-task></create-task>
             </b-modal>
         </div>        
-        
-    </div>
 </template>
 
 <script>
@@ -48,17 +57,35 @@ export default {
                 name: '',
                 completed: false
             }                    
-        }        
+        }
     }
   },
   components: {
         lane,
         createTask,
-        bottomLane
+        bottomLane,
   },
     methods: {
     create() {
         this.modalActive = true;
+    },
+    nextWeek(e) {
+        e.preventDefault()
+        var newDates = []
+        for(var i = 1; i < 8; i++)
+        {
+            newDates.push(moment(this.dates[this.dates.length - 1]).add(i, 'day'))
+        }
+        this.dates = newDates
+    },
+    prevWeek(e) {
+        e.preventDefault()
+        var newDates = []
+        for(var i = 7; i > 0; i--)
+        {
+            newDates.push(moment(this.dates[0]).subtract(i, 'day'))
+        }
+        this.dates = newDates
     }
   },  
   mounted() {
@@ -70,7 +97,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 .title {
     width: 100%;
 }
@@ -85,6 +112,20 @@ export default {
 }
 
 .button {
-    background-color: #3400b16e !important
+    background-color:white !important;
+    color: black !important;
+}
+
+.hero.is-primary {
+    background-color: #4c8ba9;
+    border-radius: 7px;
+    margin-bottom: 5px;
+}
+.section {
+    padding: 1rem 1.5rem;
+}
+
+.switch-left span {
+    font-size: .4em !important
 }
 </style>

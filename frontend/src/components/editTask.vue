@@ -16,7 +16,7 @@
             <b-checkbox v-model="task.completed">Completed?</b-checkbox>
         </section>
         <footer class="modal-card-foot">
-            <button class="button" type="button" @click="edit">Close</button>
+            <button class="button" type="button" @click="edit">Save</button>
         </footer>
     </div>
 </template>

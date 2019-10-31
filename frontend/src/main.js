@@ -5,6 +5,15 @@ import store from './store/store.js'
 import Buefy from 'buefy'
 import 'buefy/dist/buefy.css'
 import axios from 'axios'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faAngleLeft } from '@fortawesome/free-solid-svg-icons'
+import { faAngleRight } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+
+library.add(faAngleLeft)
+library.add(faAngleRight)
+
+Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 axios.defaults.baseURL = process.env.VUE_APP_URL
 axios.defaults.withCredentials = true

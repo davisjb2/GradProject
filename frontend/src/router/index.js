@@ -6,7 +6,7 @@ import logout from '@/components/logout'
 import register from '@/components/register'
 import account from '@/components/account'
 import checkAuth from '../common/checkAuth'
-import tasksMove from '@/components/tasksMove'
+import dashboard from '@/components/dashboard'
 
 Vue.use(Router)
 
@@ -21,7 +21,7 @@ const router = new Router({
         {
             path: '/dashboard',
             name: 'dashboard',
-            component: tasksMove
+            component: dashboard
         },
         {
             path: '/login',

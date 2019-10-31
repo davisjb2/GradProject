@@ -39,8 +39,7 @@ export default {
     editTask
   },
   methods: {
-    edit(res) {
-        console.log(res)
+    edit() {
         this.formProps.task = this.task;
         this.formProps.task.dueDate = new Date(this.formProps.task.dueDate)
         this.modalEditActive = true;
@@ -60,7 +59,8 @@ export default {
 }
 
 .task-card h3 {
-    font-size: 18px
+    font-size: 18px !important;
+    margin-bottom: 0 !important;
 }
 
 .task-card:hover {

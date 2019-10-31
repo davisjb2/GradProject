@@ -57,6 +57,14 @@ export default {
             {
                 return new Date(el.assignedDate).setHours(0,0,0,0) === new Date(this.id).setHours(0,0,0,0)
             })
+    },
+    id() {
+        this.loadTasks().then(() => {
+        this.taskData = JSON.parse(JSON.stringify(this.getTasks)).filter(el => 
+            {
+                return new Date(el.assignedDate).setHours(0,0,0,0) === new Date(this.id).setHours(0,0,0,0)
+            })
+      })
     }
   },
   mounted () { 
@@ -70,7 +78,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 .lane-body {
     min-height: 35vh;
 }
@@ -94,7 +102,8 @@ export default {
 }
 
 h4 {
-    font-size: 13.5px
+    font-size: 13.5px !important;
+    font-weight: lighter !important;
 }
 
 .datenum {
