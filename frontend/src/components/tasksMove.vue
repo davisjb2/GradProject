@@ -117,7 +117,7 @@ export default {
 }
 
 .hero.is-primary {
-    background-color: #4c8ba9;
+    background-color: #7666a0;
     border-radius: 7px;
     margin-bottom: 5px;
 }
