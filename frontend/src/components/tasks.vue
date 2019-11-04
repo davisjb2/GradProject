@@ -1,9 +1,7 @@
 <template>
     <div class="section">
         <div class="container">
-            <h1 class="title">Tasks</h1>
-            <b-button tag="input" class="button is-info" value="Create New Task" @click="create"/> 
-            <b-table :data="taskData" :columns="columns" @select="edit"></b-table>
+            <FullCalendar defaultView="dayGridMonth" :aspectRatio="1.45" :events="events" :header="{ left: 'listMonth, today', center: 'prev title next', right: 'dayGridMonth, dayGridWeek' }" :plugins="calendarPlugins" />
         </div>
 
          <b-modal :active.sync="modalActive" has-modal-card>
@@ -21,32 +19,15 @@
 import { mapGetters, mapActions } from 'vuex'
 import createTask from '../components/createTask'
 import editTask from '../components/editTask'
+import FullCalendar from '@fullcalendar/vue'
+import dayGridPlugin from '@fullcalendar/daygrid'
+import listPlugin from '@fullcalendar/list'
+
 export default {
   name: 'tasks',
   data() {
             return {
                 taskData: [],
-                columns: [
-                    {
-                        field: 'id',
-                        label: 'ID',
-                        width: '40',
-                        numeric: true
-                    },
-                    {
-                        field: 'name',
-                        label: 'Title',
-                    },
-                    {
-                        field: 'dueDate',
-                        label: 'Due Date',
-                    },
-                    {
-                        field: 'completed',
-                        label: 'Completed',
-                        centered: true
-                    }
-                ],
                 modalActive: false,
                 modalEditActive: false,
                 formProps: {
@@ -56,12 +37,28 @@ export default {
                         name: '',
                         completed: false
                     }                    
-                }
+                },
+                events: [
+                {
+                    title : 'event1',
+                    date : '2019-11-01'
+                },
+                {
+                    title : 'event2',
+                    date : '2019-11-05'
+                },
+                {
+                    title : 'event3',
+                    date : '2019-11-09'
+                },
+            ],
+            calendarPlugins: [ dayGridPlugin, listPlugin ]
             }
   },
   components: {
       createTask,
-      editTask
+      editTask,
+      FullCalendar
   },
   methods: {
     ...mapActions('task', [
@@ -104,13 +101,15 @@ export default {
 }
 </script>
 
+<style lang='scss'>
+
+@import '~@fullcalendar/core/main.css';
+@import '~@fullcalendar/daygrid/main.css';
+
+</style>
+
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+h2 {
+    display: inline !important
 }
 </style>
