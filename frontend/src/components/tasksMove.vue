@@ -8,13 +8,13 @@
                 <div class="column">
                     <div class="columns">
                         <div class="column">
-                            <a href="" style="color:white"><font-awesome-icon icon="angle-left" size="2x" @click="prevWeek"/></a>
+                            <a href="" style="color:white"><font-awesome-icon icon="chevron-left" size="2x" @click="prevWeek"/></a>
                         </div>                        
                         <div class="column">
                             <h1 class="title" style="white-space: nowrap">{{ dates[0] | formatDate }} - {{ dates[dates.length - 1] | formatDate }}</h1>
                         </div>
                         <div class="column">
-                            <a href="" style="color:white"><font-awesome-icon icon="angle-right" size="2x" @click="nextWeek"/></a>
+                            <a href="" style="color:white"><font-awesome-icon icon="chevron-right" size="2x" @click="nextWeek"/></a>
                         </div>
                     </div>
                 </div>
@@ -102,15 +102,6 @@ export default {
     width: 100%;
 }
 
-.headerBox {
-    width: 100%;
-    background: white;
-    border: 1px solid #E2E4E6;
-    border-radius: 7px;
-    background: #E2E4E6;
-    box-shadow: 2px 1px 2px 0px rgba(0, 0, 0, 0.65);
-}
-
 .button {
     background-color:white !important;
     color: black !important;
@@ -128,4 +119,5 @@ export default {
 .switch-left span {
     font-size: .4em !important
 }
+
 </style>
