@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="container">
-            <FullCalendar defaultView="dayGridMonth" :aspectRatio="1.45" :buttonText="{ dayGridMonth: 'Month', dayGridWeek: 'Week', listMonth: 'List', today: 'Today'}" :events="events" :header="{ left: 'listMonth, today', center: 'prev title next', right: 'dayGridMonth, dayGridWeek' }" :plugins="calendarPlugins" />
+            <FullCalendar defaultView="dayGridMonth" @eventClick="edit" :eventLimit="true" :aspectRatio="1.45" :buttonText="{ dayGridMonth: 'Month', dayGridWeek: 'Week', listMonth: 'List', today: 'Today'}" :events="taskData" :header="{ left: 'listMonth, today', center: 'prev title next', right: 'dayGridMonth, dayGridWeek' }" :plugins="calendarPlugins" />
         </div>
 
          <b-modal :active.sync="modalActive" has-modal-card>
@@ -38,21 +38,7 @@ export default {
                         completed: false
                     }                    
                 },
-                events: [
-                {
-                    title : 'event1',
-                    date : '2019-11-01'
-                },
-                {
-                    title : 'event2',
-                    date : '2019-11-05'
-                },
-                {
-                    title : 'event3',
-                    date : '2019-11-09'
-                },
-            ],
-            calendarPlugins: [ dayGridPlugin, listPlugin ]
+                calendarPlugins: [ dayGridPlugin, listPlugin ]
             }
   },
   components: {
@@ -68,7 +54,9 @@ export default {
         this.modalActive = true;
     },
     edit(res) {
-        this.formProps.task = res;
+        this.formProps.task = this.taskData.filter((el) => {
+            return el.id == res.event.id
+        })[0];
         this.modalEditActive = true;
     }
   },
@@ -81,7 +69,9 @@ export default {
     getTasks() {
       this.taskData = JSON.parse(JSON.stringify(this.getTasks))
         .map(el => {
-            el.dueDate = new Date(el.dueDate)
+            el.date = new Date(el.dueDate)
+            el.title = el.name
+            el.allDay = true
             return el
         })
     }
@@ -90,7 +80,9 @@ export default {
       this.loadTasks().then(() => {
         this.taskData = JSON.parse(JSON.stringify(this.getTasks))
         .map(el => {
-            el.dueDate = new Date(el.dueDate)
+            el.date = new Date(el.dueDate)
+            el.title = el.name
+            el.allDay = true
             return el
         })
         /* eslint-disable */
@@ -136,11 +128,11 @@ h2 {
     border-radius: 4px !important;
     justify-content: center !important;
     padding-bottom: calc(0.375em - 1px) !important;
-    padding-left: 0.75em !important;
-    padding-right: 0.75em !important;
-    padding-top: calc(0.375em - 1px) !important;
-    text-align: center !important;
-    white-space: nowrap !important;
+    background-color: white;
+    border-bottom: 1px solid #ccc !important;
+    cursor: pointer;
+    text-align:left;
+    border-radius: 6px;
 }
 
 .fc-next-button {
@@ -154,11 +146,25 @@ h2 {
     background-color: transparent !important;
     border: none !important;
     margin: 0 !important;
-    color:white!important;    
+    color:white !important;    
 }
 
 .fc-icon {
     font-size: 2em !important;
 }
 
+.fc-event {
+    background-color: white !important;
+    margin: 3% !important;
+    border: 1px solid #ccc !important;
+    cursor: pointer !important;
+    text-align:left !important;
+    border-radius: 6px !important;
+    color: black !important;
+    font-size: 18px !important;
+}
+
+.fc-event-container {
+    padding: 0 !important;
+}
 </style>
