@@ -29,6 +29,12 @@ User.hasMany(Label)
 Task.belongsToMany(Label, { through: 'taskLabel' })
 Label.belongsToMany(Task, { through: 'taskLabel' })
 
+Task.addScope('labels', {
+    include: [
+        { model: Label, attributes: { include: ['id', 'name', 'color']}}
+    ]
+})
+
 db.sequelize = sequelize
 db.Sequelize = Sequelize
 

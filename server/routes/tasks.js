@@ -36,7 +36,6 @@ router.post('/create', async (req, res) => {
 
 router.post('/updateLabels/:id', async (req, res) => {
     try {
-        console.log("REQU: ", req.body)
         const task = await Task.findByPk(req.params.id)
         if(task == null || task == undefined)
         {
@@ -44,21 +43,14 @@ router.post('/updateLabels/:id', async (req, res) => {
         }
         if(req.user.id == task.UserId)
         {
-            labels = await task.getLabels()
-            labels.forEach(async (lab) => {
-                await task.removeLabel(lab.id)
-            })
-            req.body.forEach(async (lab) => {
-                const label = await Label.findByPk(lab)
-                console.log(label)
-                console.log("RET: ", await task.addLabel(label))
-            });
-            labels = await task.getLabels()
-            console.log("LABELS:", labels)
-            task.labels = labels
+            await task.setLabels(req.body)
+            task2 = await Task.scope('labels').findByPk(req.params.id)
+            return res.status(200).send({ status: 200, result: task2})            
+        } else {
+            throw new Error('Task not for User')
         }
 
-        return res.status(200).send({ status: 200, result: task})
+
     } catch (e) {
         return res.status(200).send({ status: 500, result: undefined, error: e.message})
     }
