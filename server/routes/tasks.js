@@ -2,6 +2,7 @@ const router = new require('express').Router()
 const { sequelize } = require('../models/')
 const Task = sequelize.models.Task
 const User = sequelize.models.User
+const Label = sequelize.models.Label
 
 router.use('/', (req, res, next) => {
     if(req.user !== undefined) {
@@ -33,6 +34,35 @@ router.post('/create', async (req, res) => {
     }
 })
 
+router.post('/updateLabels/:id', async (req, res) => {
+    try {
+        console.log("REQU: ", req.body)
+        const task = await Task.findByPk(req.params.id)
+        if(task == null || task == undefined)
+        {
+            throw new Error(`No Task with id ${req.params.id}`)
+        }
+        if(req.user.id == task.UserId)
+        {
+            labels = await task.getLabels()
+            labels.forEach(async (lab) => {
+                await task.removeLabel(lab.id)
+            })
+            req.body.forEach(async (lab) => {
+                const label = await Label.findByPk(lab)
+                console.log(label)
+                console.log("RET: ", await task.addLabel(label))
+            });
+            labels = await task.getLabels()
+            console.log("LABELS:", labels)
+            task.labels = labels
+        }
+
+        return res.status(200).send({ status: 200, result: task})
+    } catch (e) {
+        return res.status(200).send({ status: 500, result: undefined, error: e.message})
+    }
+})
 
 router.post('/update/:id', async (req, res) => {
     try {

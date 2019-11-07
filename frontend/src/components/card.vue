@@ -2,6 +2,11 @@
   <div>
     <div class="task-card" @click="edit">
         <div class="task-container">
+            <div class="level">
+              <div v-for="(label,i) in task.labels" :key="i" class="level-item">
+                {{ label.id }} 
+              </div>
+            </div>
             <h3>
                 {{ task.name }}
             </h3>

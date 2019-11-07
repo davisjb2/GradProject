@@ -18,10 +18,16 @@ fs.readdirSync(__dirname)
         db[model.name] = model
     })
 
-const { User, Task } = sequelize.models
+const { User, Task, Label } = sequelize.models
 
 User.hasMany(Task)
 Task.belongsTo(User)
+
+Label.belongsTo(User)
+User.hasMany(Label)
+
+Task.belongsToMany(Label, { through: 'taskLabel' })
+Label.belongsToMany(Task, { through: 'taskLabel' })
 
 db.sequelize = sequelize
 db.Sequelize = Sequelize

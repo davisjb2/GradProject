@@ -23,13 +23,15 @@ const mutations = {
 }
 
 const actions = {
-    async createTask ({ commit }, task) {
-        const taskResult = await axios.post('/tasks/create', task)
-        if(taskResult.data.status == 200)
+    async createTask ({ commit }, data) {
+        const taskResult = await axios.post('/tasks/create', data.task)
+        const labelsResult = await axios.post(`/tasks/updateLabels/${taskResult.data.result.id}`, data.labels)
+        console.log(labelsResult)
+        if(labelsResult.data.status == 200 && taskResult.data.status == 200)
         {
-            commit('CREATE_TASK', taskResult.data.result)
+            commit('CREATE_TASK', labelsResult.data.result)
             return { success: true }
-        }
+        }        
         // eslint-disable-next-line
         console.log("Error creating task")
         commit('application/ERROR', 'Error creating task')

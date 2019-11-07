@@ -64,7 +64,7 @@ export default {
     },
     changeDueDate(res) {
         var index = this.taskData.findIndex(e => e.id == res.event.id)
-        this.taskData[index].dueDate = new Date(res.event.start)
+        this.taskData[index].date = new Date(res.event.start)
         var task = this.taskData[index]
         task.dueDate = new Date(res.event.start)
         this.updateTask(task)
