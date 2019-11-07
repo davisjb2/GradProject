@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="container">
-            <FullCalendar defaultView="dayGridMonth" @eventClick="edit" :eventLimit="true" :aspectRatio="1.45" :buttonText="{ dayGridMonth: 'Month', dayGridWeek: 'Week', listMonth: 'List', today: 'Today'}" :events="taskData" :header="{ left: 'listMonth, today', center: 'prev title next', right: 'dayGridMonth, dayGridWeek' }" :plugins="calendarPlugins" />
+            <FullCalendar defaultView="dayGridMonth" :editable="true" @eventDrop="changeDueDate" @eventClick="edit" :eventLimit="true" :aspectRatio="1.45" :buttonText="{ dayGridMonth: 'Month', dayGridWeek: 'Week', listMonth: 'List', today: 'Today'}" :events="taskData" :header="{ left: 'listMonth, today', center: 'prev title next', right: 'dayGridMonth, dayGridWeek' }" :plugins="calendarPlugins" />
         </div>
 
          <b-modal :active.sync="modalActive" has-modal-card>
@@ -20,6 +20,7 @@ import { mapGetters, mapActions } from 'vuex'
 import createTask from '../components/createTask'
 import editTask from '../components/editTask'
 import FullCalendar from '@fullcalendar/vue'
+import interatctionPlugin from '@fullcalendar/interaction'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import listPlugin from '@fullcalendar/list'
 
@@ -38,7 +39,7 @@ export default {
                         completed: false
                     }                    
                 },
-                calendarPlugins: [ dayGridPlugin, listPlugin ]
+                calendarPlugins: [ dayGridPlugin, listPlugin, interatctionPlugin ]
             }
   },
   components: {
@@ -48,7 +49,8 @@ export default {
   },
   methods: {
     ...mapActions('task', [
-        'loadTasks'
+        'loadTasks',
+        'updateTask'
     ]),
     create() {
         this.modalActive = true;
@@ -57,7 +59,31 @@ export default {
         this.formProps.task = this.taskData.filter((el) => {
             return el.id == res.event.id
         })[0];
+        this.formProps.task.dueDate = new Date(this.formProps.task.dueDate)
         this.modalEditActive = true;
+    },
+    changeDueDate(res) {
+        var index = this.taskData.findIndex(e => e.id == res.event.id)
+        this.taskData[index].dueDate = new Date(res.event.start)
+        var task = this.taskData[index]
+        task.dueDate = new Date(res.event.start)
+        this.updateTask(task)
+        .then(() => {
+            this.loadTasks().then(() => {
+            this.taskData = JSON.parse(JSON.stringify(this.getTasks))
+                .map(el => {
+                    el.date = new Date(el.dueDate)
+                    el.title = el.name
+                    el.allDay = true
+                    return el
+                })
+                /* eslint-disable */
+                console.log("taskData mounted")
+            })
+        }).catch((e) => {
+          // eslint-disable-next-line
+          console.error(e)
+        })
     }
   },
   computed: {
