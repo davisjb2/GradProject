@@ -1,19 +1,34 @@
 <template>
     <div class="modal-card">
+        <header class="modal-card-head">
+            <p class="modal-card-title">Edit Task</p>
+        </header>
         <section class="modal-card-body">
-            <b-field label="Name" label-position="on-border">
-                <b-input
-                    type="text"
-                    v-model="task.name">
-                </b-input>
-            </b-field>
-            <b-field label="Due Date" label-position="on-border">
-                <b-datepicker
-                    icon="calendar-today" v-model="task.dueDate">
-                </b-datepicker>
-            </b-field>
+          <div class="columns">
+            <div class="column">
+              <b-field label="Name" label-position="on-border">
+                  <b-input
+                      type="text"
+                      v-model="task.name">
+                  </b-input>
+              </b-field>
+              <b-field label="Due Date" label-position="on-border">
+                  <b-datepicker
+                      icon="calendar-today" v-model="task.dueDate">
+                  </b-datepicker>
+              </b-field>
 
-            <b-checkbox v-model="task.completed">Completed?</b-checkbox>
+              <b-checkbox v-model="task.completed">Completed?</b-checkbox>
+            </div>
+            <div class="column">
+                <div class="labels">
+                  <b-checkbox v-for="(label, i) in labels" :key="i" type="is-light" :style="{ background: label.color }" v-model="labelsGroup"
+                      :native-value="label.id">
+                      {{ label.name }}
+                  </b-checkbox>
+                </div>
+              </div>
+            </div>
         </section>
         <footer class="modal-card-foot">
             <button class="button" type="button" @click="edit">Save</button>
@@ -22,16 +37,25 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'edit',
   props: ['task'],
+  data() {
+    return {
+      labels: [],
+      labelsGroup: []
+    }
+  },
   methods: {
     ...mapActions('task', [
       'updateTask'
     ]),
+    ...mapActions('label', [
+      'loadLabels'
+    ]),
     edit () {
-      const data = this.task
+      const data = { task: this.task, labels: this.labelsGroup }
       this.updateTask(data)
         .then(() => {
           this.$parent.close()
@@ -40,6 +64,25 @@ export default {
           console.error(e)
         })
     }
+  },
+  computed: {
+    ...mapGetters('label', [
+      'getLabels'
+    ])
+  },
+  watch: {
+    getLabels() {
+      this.labels = JSON.parse(JSON.stringify(this.getLabels))
+    }
+  },
+  mounted() {
+      this.loadLabels().then(() => {
+        this.labels = JSON.parse(JSON.stringify(this.getLabels))
+      })
+      for(var i = 0; i < this.task.Labels.length; i++)
+      {
+        this.labelsGroup.push(this.task.Labels[i].id)
+      }
   }
 }
 </script>
@@ -50,5 +93,15 @@ export default {
     width:30vw;
     height:50vh;
     border-radius: 8px;
+}
+.labels .check {
+  border: none !important;
+  background-color: none !important;
+}
+
+.labels .checkbox {
+    display: flex !important;
+    margin-left: 0 !important;
+    margin-bottom: 10px;
 }
 </style>

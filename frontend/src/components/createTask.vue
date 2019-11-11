@@ -92,6 +92,12 @@ export default {
 
 
 <style>
+.modal-card {
+    width:30vw;
+    height:50vh;
+    border-radius: 8px;
+}
+
 .labels .check {
   border: none !important;
   background-color: none !important;

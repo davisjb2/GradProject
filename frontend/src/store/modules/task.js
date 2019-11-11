@@ -1,4 +1,5 @@
 import axios from 'axios'
+import Vue from 'vue'
 
 const state = {
     tasks: []
@@ -6,7 +7,7 @@ const state = {
 
 const mutations = {
     'CREATE_TASK' (state, data) {
-        state.tasks.push(data)
+        state.tasks.push(JSON.parse(JSON.stringify(data)))
     },
     'DELETE_TASK' (state, id) {
         state.tasks.filter(function(e) {
@@ -15,10 +16,11 @@ const mutations = {
     },
     'UPDATE_TASK' (state, data) {
         var index = state.tasks.findIndex(e => e.id === data.id)
-        state.tasks[index] = data
+        //state.tasks[index] = JSON.parse(JSON.stringify(data))
+        Vue.set(state.tasks, index, JSON.parse(JSON.stringify(data)))
     },
     'LOAD_TASKS' (state, data) {
-        state.tasks = data
+        state.tasks = JSON.parse(JSON.stringify(data))
     }
 }
 
@@ -26,7 +28,6 @@ const actions = {
     async createTask ({ commit }, data) {
         const taskResult = await axios.post('/tasks/create', data.task)
         const labelsResult = await axios.post(`/tasks/updateLabels/${taskResult.data.result.id}`, data.labels)
-        console.log(labelsResult)
         if(labelsResult.data.status == 200 && taskResult.data.status == 200)
         {
             commit('CREATE_TASK', labelsResult.data.result)
@@ -38,9 +39,24 @@ const actions = {
         return { success: false }
     },
     // eslint-disable-next-line    
-    async updateTask ({ commit }, task) {
-        const taskResult = await axios.post(`/tasks/update/${task.id}`, task)
-        if(taskResult.data.status == 200)
+    async updateTask ({ commit }, data) {
+        const taskResult = await axios.post(`/tasks/update/${data.task.id}`, data.task)
+        console.log(taskResult)
+        const labelsResult = await axios.post(`/tasks/updateLabels/${taskResult.data.result.id}`, data.labels)
+        if(labelsResult.data.status == 200 && taskResult.data.status == 200)
+        {
+            commit('UPDATE_TASK', labelsResult.data.result)
+            return { success: true }
+        }
+        // eslint-disable-next-line
+        console.log("Error updating task", labelsResult.data.error)
+        commit('application/ERROR', 'Error updating task')
+        return { success: false }  
+    },
+    // eslint-disable-next-line    
+    async updateTaskMove ({ commit }, data) {
+        const taskResult = await axios.post(`/tasks/update/${data.id}`, data)
+        if(taskResult.data.status == 200 && taskResult.data.status == 200)
         {
             commit('UPDATE_TASK', taskResult.data.result)
             return { success: true }
@@ -49,7 +65,7 @@ const actions = {
         console.log("Error updating task", taskResult.data.error)
         commit('application/ERROR', 'Error updating task')
         return { success: false }  
-    },
+    },    
     // eslint-disable-next-line
     async deleteTask ({ commit }, id) {
         const taskResult = await axios.post(`/tasks/delete/${id}`)
@@ -71,7 +87,7 @@ const actions = {
             return { success: true }
         }
         // eslint-disable-next-line
-        console.log("Error loading tasks")
+        console.log("Error loading tasks", tasksResult)
         commit('application/ERROR', 'Error loading tasks')
         return { success: false }  
     }

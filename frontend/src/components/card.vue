@@ -2,12 +2,11 @@
   <div>
     <div class="task-card" @click="edit">
         <div class="task-container">
-            <div class="level">
-              <div v-for="(label,i) in task.labels" :key="i" class="level-item">
-                {{ label.id }} 
+              <div class="columns" style="margin: 0">
+                <div class="column level-item label-bar" v-for="(label,i) in task.Labels" :key="i" :style="{ background: label.color }">
+                </div>
               </div>
-            </div>
-            <h3>
+            <h3 style="margin-top: 0">
                 {{ task.name }}
             </h3>
             <small>{{ task.dueDate | formatDate }}</small>
@@ -108,5 +107,14 @@ export default {
 .task-card .task-container .task-notifications .comments-number {
   display: inline-block;
   font-size: 0.8em;
+}
+
+.label-bar {
+  width: 100%;
+  height: 10px;
+  border-radius: 3px;
+  margin-top: 8px;
+  display: inline-block;
+  margin-right: 2%;
 }
 </style>

@@ -15,7 +15,8 @@ router.use('/', (req, res, next) => {
 router.get('/', async (req, res) => {
     try {
         const user = await User.findByPk(req.user.id)
-        const tasks = await user.getTasks()
+        const tasks = await user.getTasks({ scope: 'labels' })
+        console.log(tasks)
         return res.status(200).send({ status: 200, result: tasks})
     } catch (e) {
         return res.status(200).send({ status: 500, result: undefined, error: e.message})
@@ -66,9 +67,9 @@ router.post('/update/:id', async (req, res) => {
         if(req.user.id == task.UserId)
         {
             await task.update(req.body)
-            console.log(task)
         }
-        return res.status(200).send({ status: 200, result: task})
+        const task2 = await Task.scope('labels').findByPk(req.params.id)
+        return res.status(200).send({ status: 200, result: task2 })
     } catch (e) {
         return res.status(200).send({ status: 500, result: undefined, error: e.message})
     }
