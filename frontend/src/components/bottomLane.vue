@@ -29,14 +29,14 @@ export default {
   },
   methods: {
       ...mapActions('task', [
-          'updateTask',
+          'updateTaskMove',
           'loadTasks'
       ]),
       doChange (evt) {
          if(evt.added) {
             const data = evt.added.element
-            data.assignedDate= null
-            this.updateTask(data)
+            data.assignedDate = null
+            this.updateTaskMove(data)
                 .then(() => {
                 }).catch((e) => {
                 // eslint-disable-next-line
