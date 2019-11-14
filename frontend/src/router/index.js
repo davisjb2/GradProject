@@ -7,6 +7,7 @@ import register from '@/components/register'
 import account from '@/components/account'
 import checkAuth from '../common/checkAuth'
 import dashboard from '@/components/dashboard'
+import completed from '@/components/completedTasks'
 
 Vue.use(Router)
 
@@ -42,7 +43,12 @@ const router = new Router({
             path: '/account',
             name: 'account',
             component: account
-        }
+        },
+        {
+            path: '/completed',
+            name: 'completed',
+            component: completed
+        }        
     ]
 })
 

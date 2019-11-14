@@ -55,14 +55,14 @@ export default {
     getTasks() {
         this.taskData = JSON.parse(JSON.stringify(this.getTasks)).filter(el => 
             {
-                return new Date(el.assignedDate).setHours(0,0,0,0) === new Date(this.id).setHours(0,0,0,0)
+                return new Date(el.assignedDate).setHours(0,0,0,0) === new Date(this.id).setHours(0,0,0,0) && (!el.completed)
             })
     },
     id() {
         this.loadTasks().then(() => {
         this.taskData = JSON.parse(JSON.stringify(this.getTasks)).filter(el => 
             {
-                return new Date(el.assignedDate).setHours(0,0,0,0) === new Date(this.id).setHours(0,0,0,0)
+                return new Date(el.assignedDate).setHours(0,0,0,0) === new Date(this.id).setHours(0,0,0,0) && (!el.completed)
             })
       })
     }
@@ -71,7 +71,7 @@ export default {
       this.loadTasks().then(() => {
         this.taskData = JSON.parse(JSON.stringify(this.getTasks)).filter(el => 
             {
-                return new Date(el.assignedDate).setHours(0,0,0,0) === new Date(this.id).setHours(0,0,0,0)
+                return new Date(el.assignedDate).setHours(0,0,0,0) === new Date(this.id).setHours(0,0,0,0) && (!el.completed)
             })
       })
    }

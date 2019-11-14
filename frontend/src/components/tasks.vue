@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="container">
-            <FullCalendar defaultView="dayGridMonth" :editable="true" @eventDrop="changeDueDate" @eventClick="edit" :eventLimit="true" :aspectRatio="1.45" :buttonText="{ dayGridMonth: 'Month', dayGridWeek: 'Week', listMonth: 'List', today: 'Today'}" :events="taskData" :header="{ left: 'listMonth, today', center: 'prev title next', right: 'dayGridMonth, dayGridWeek' }" :plugins="calendarPlugins" />
+            <FullCalendar defaultView="dayGridMonth" eventTextColor="purple" eventColor="white" :editable="true" @eventDrop="changeDueDate" @eventClick="edit" :eventLimit="true" :aspectRatio="1.45" :buttonText="{ dayGridMonth: 'Month', dayGridWeek: 'Week', listMonth: 'List', today: 'Today'}" :events="taskData" :header="{ left: 'listMonth, today', center: 'prev title next', right: 'dayGridMonth, dayGridWeek' }" :plugins="calendarPlugins" />
         </div>
 
          <b-modal :active.sync="modalActive" has-modal-card>
@@ -109,6 +109,11 @@ export default {
             el.date = new Date(el.dueDate)
             el.title = el.name
             el.allDay = true
+            if(el.completed) {
+                el.color = "#80808052"
+                el.textColor = "#00000070"
+
+            }
             return el
         })
         /* eslint-disable */
@@ -180,13 +185,11 @@ h2 {
 }
 
 .fc-event {
-    background-color: white !important;
     margin: 3% !important;
     border: 1px solid #ccc !important;
     cursor: pointer !important;
     text-align:left !important;
     border-radius: 6px !important;
-    color: black !important;
     font-size: 18px !important;
 }
 

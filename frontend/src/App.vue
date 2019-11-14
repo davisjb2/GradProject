@@ -19,7 +19,10 @@
                     </button>                                      
                     <button v-if="loggedIn" @click="goRouter('account')" class="button is-light diff-button">
                         Account
-                    </button>                    
+                    </button>
+                    <button v-if="loggedIn" @click="goRouter('completed')" class="button is-light diff-button">
+                        Completed Tasks
+                    </button>
                 </div>
             </b-navbar-item>
         </template>
@@ -113,7 +116,7 @@ export default {
 
 .navbar {
   padding: 10px 20px 10px 20px;
-  background-color: #2969a7;
+  background-color: #2969a7e0;
   color: white;
 }
 
