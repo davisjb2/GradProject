@@ -3,7 +3,7 @@
     <div class="task-card" @click="edit">
         <div class="task-container">
               <div class="columns" style="margin: 0">
-                <div class="column level-item label-bar" v-for="(label,i) in task.Labels" :key="i" :style="{ background: label.color }">
+                <div class="column label-bar" v-for="(label,i) in task.Labels" :key="i" :style="{ background: label.color, padding: 0 }">
                 </div>
               </div>
             <h3 style="margin-top: 0">
