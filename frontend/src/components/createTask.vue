@@ -17,6 +17,12 @@
                       icon="calendar-today" v-model="task.dueDate">
                   </b-datepicker>
                 </b-field>
+                <b-field label="Description" label-position="on-border">
+                  <b-input
+                      type="textarea"
+                      v-model="task.description">
+                  </b-input>
+                </b-field>                
                 <b-checkbox v-model="task.completed">Completed?</b-checkbox>
               </div>
               <div class="column">
@@ -46,7 +52,8 @@ export default {
         name: '',
         completed: false,
         dueDate: new Date(),
-        assignedDate: undefined
+        assignedDate: undefined,
+        description: ""
       },
       labels: [],
       labelsGroup: []

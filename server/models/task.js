@@ -19,6 +19,10 @@ const TaskModel = (sequelize, DataTypes) => {
         assignedDate: {
             type: DataTypes.DATE,
             defaultValue: undefined
+        },
+        description: {
+            type: DataTypes.TEXT,
+            defaultValue: ""
         }
     }, {
         sequelize,
