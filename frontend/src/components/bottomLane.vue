@@ -91,7 +91,8 @@ export default {
   background: #E2E4E6;
   box-shadow: 2px 1px 2px 0px rgba(0, 0, 0, 0.65);
   margin-bottom: 5px;
-  min-height:10vh;
+  min-height:8vh;
+  display:flex;
 }
 
 .horizontal {  

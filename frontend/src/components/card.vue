@@ -60,6 +60,8 @@ export default {
   cursor: pointer;
   text-align:left;
   border-radius: 6px;
+  min-width: 7em;
+  margin-left: 5px;
 }
 
 .task-card h3 {
