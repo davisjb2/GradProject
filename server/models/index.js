@@ -18,7 +18,7 @@ fs.readdirSync(__dirname)
         db[model.name] = model
     })
 
-const { User, Task, Label } = sequelize.models
+const { User, Task, Label, ChecklistItem } = sequelize.models
 
 User.hasMany(Task)
 Task.belongsTo(User)
@@ -32,6 +32,14 @@ Label.belongsToMany(Task, { through: 'taskLabel' })
 Task.addScope('labels', {
     include: [
         { model: Label, attributes: { include: ['id', 'name', 'color']}}
+    ]
+})
+
+ChecklistItem.hasOne(Task)
+
+Task.addScope('checklist', {
+    include: [
+        { model: ChecklistItem, attributes: { include: ['id', 'name', 'completed', 'order'] }}
     ]
 })
 

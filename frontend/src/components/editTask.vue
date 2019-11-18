@@ -32,6 +32,7 @@
                       {{ label.name }}
                   </b-checkbox>
                 </div>
+                <button class="button" type="button" @click="createChecklist">Add Checklist</button>
               </div>
             </div>
         </section>
@@ -68,6 +69,9 @@ export default {
           // eslint-disable-next-line
           console.error(e)
         })
+    },
+    createChecklist() {
+      
     }
   },
   computed: {
