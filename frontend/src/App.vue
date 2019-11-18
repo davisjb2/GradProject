@@ -116,7 +116,7 @@ export default {
 
 .navbar {
   padding: 10px 20px 10px 20px;
-  background-color: #2969a7e0;
+  background-color: rgb(91, 169, 234);
   color: white;
 }
 
