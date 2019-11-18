@@ -25,7 +25,7 @@ export default {
 @import url('https://fonts.googleapis.com/css?family=Sofia&display=swap');
 
 .full {
-  background-image: url(/img/danbackground.533b30d1.jpg);
+  background-image: url('~@/assets/danbackground.jpg');
   height: 100%;
   width: 100%;
   z-index: -1;
