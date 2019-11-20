@@ -56,10 +56,10 @@ export default {
           {
             if(this.id == 0)
             {
-              return el.assignedDate == undefined
+              return el.assignedDate == undefined  && (!el.completed)
             } else
             {
-              return el.assignedDate != undefined && (new Date(el.assignedDate)).setHours(0,0,0,0) < (new Date()).setHours(0,0,0,0)
+              return el.assignedDate != undefined && (new Date(el.assignedDate)).setHours(0,0,0,0) < (new Date()).setHours(0,0,0,0)  && (!el.completed)
             }
           })
     }
@@ -70,10 +70,10 @@ export default {
           {
             if(this.id == 0)
             {
-              return el.assignedDate == undefined
+              return el.assignedDate == undefined  && (!el.completed)
             } else
             {
-              return el.assignedDate != undefined && (new Date(el.assignedDate)).setHours(0,0,0,0) < (new Date()).setHours(0,0,0,0)
+              return el.assignedDate != undefined && (new Date(el.assignedDate)).setHours(0,0,0,0) < (new Date()).setHours(0,0,0,0) && (!el.completed)
             }
           })
       })
