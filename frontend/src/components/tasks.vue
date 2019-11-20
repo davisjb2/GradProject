@@ -50,7 +50,7 @@ export default {
   methods: {
     ...mapActions('task', [
         'loadTasks',
-        'updateTask'
+        'updateTaskMove'
     ]),
     create() {
         this.modalActive = true;
@@ -67,7 +67,7 @@ export default {
         this.taskData[index].date = new Date(res.event.start)
         var task = this.taskData[index]
         task.dueDate = new Date(res.event.start)
-        this.updateTask(task)
+        this.updateTaskMove(task)
         .then(() => {
             this.loadTasks().then(() => {
             this.taskData = JSON.parse(JSON.stringify(this.getTasks))
