@@ -55,11 +55,7 @@
                       {{ label.name }}
                   </b-checkbox>
                 </div>
-<<<<<<< HEAD
-                <button class="button" type="button" @click="createChecklist">Add Checklist</button>
-=======
                 <button v-if="!checklistShow" class="button" type="button" @click="createChecklist">Add Checklist</button>
->>>>>>> checklists
               </div>
             </div>
         </section>
