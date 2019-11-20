@@ -60,9 +60,10 @@ export default {
     ]),
     alertCustom() {
         this.$buefy.dialog.alert({
-            title: 'Title Alert',
-            message: 'I have a title, a custom button and <b>HTML</b>!',
-            confirmText: 'Cool!',
+            title: 'Welcome!',
+            message: 'Just a few helpful hints before you get started: ',
+            confirmText: 'Get Started!',
+            trapFocus: true,
             onConfirm: () => {
               this.instrConfirm()
                 .then(() => {
@@ -81,8 +82,6 @@ export default {
     ]),
   },
   mounted() {
-    console.log("Mounted")
-    console.log(this.getUser)
     if(!this.getUser.instr) this.alertCustom()
   }
 }

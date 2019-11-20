@@ -13,6 +13,8 @@ export default (to, from, next) => {
             case 'register':
             case 'home':
                 return next({ name: 'dashboard' })
+            default:
+                return next()
         }
     } else {
         store.dispatch('user/reauth').then(authRes => {
@@ -23,6 +25,8 @@ export default (to, from, next) => {
                     case 'register':
                     case 'home':
                         return next({ name: 'dashboard' })
+                    default:
+                        return next()                        
                 }
             } else {
                 switch(to.name) {
@@ -31,10 +35,11 @@ export default (to, from, next) => {
                     case 'tasks':
                     case 'tasksMove':
                         return next({ name: 'login' })
+                    default:
+                        return next()                        
                 }
             }
         })
     }
 
-    return next()
 }
