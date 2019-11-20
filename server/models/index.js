@@ -35,6 +35,15 @@ Task.addScope('labels', {
     ]
 })
 
+Task.hasMany(ChecklistItem)
+ChecklistItem.belongsTo(Task)
+
+Task.addScope('checklist', {
+    include: [
+        { model: ChecklistItem, attributes: { include: ['id', 'name', 'completed', 'order'] }}
+    ]
+})
+
 db.sequelize = sequelize
 db.Sequelize = Sequelize
 
