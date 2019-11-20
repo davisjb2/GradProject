@@ -41,7 +41,7 @@
         </section>
         <footer class="modal-card-foot">
             <button class="button" type="button" @click="$parent.close()">Close</button>
-            <button class="button is-primary" @click="create">Create</button>
+            <button class="button is-success" @click="create">Create</button>
         </footer>
     </div>
 </template>
@@ -118,6 +118,10 @@ export default {
     display: flex !important;
     margin-left: 0 !important;
     margin-bottom: 10px;
+}
+
+button.is-success {
+  background: rgb(181, 227, 126) !important;
 }
 
 </style>
