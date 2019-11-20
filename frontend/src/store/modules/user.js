@@ -5,7 +5,8 @@ const state = {
         firstName: '',
         lastName: '',
         email: '',
-        password: ''
+        password: '',
+        instr: false
     },
     loggedIn: false
 }
@@ -20,12 +21,16 @@ const mutations = {
             firstName: '',
             lastName: '',
             email: '',
-            password: ''
+            password: '',
+            instr: false
         }
         state.loggedIn = false
     },
     'UPDATE_USER' (state, data) {
         state.user = data
+    },
+    'INSTR_CONFIRM' (state) {
+        state.user.instr = true
     }
 }
 
@@ -87,7 +92,20 @@ const actions = {
             return { success: true }
         }
         return { success: false }
-    }
+    },
+    // eslint-disable-next-line
+    async instrConfirm ({ commit }) {
+        const userResult = await axios.post(`/auth/instrConfirm/`)
+        if(userResult.data.status == 200)
+        {
+            commit('INSTR_CONFIRM')
+            return { success: true }
+        }
+        // eslint-disable-next-line
+        console.log("Error confirming instr for user", userResult.data.error)
+        commit('application/ERROR', "Error confirming instr for user")
+        return { success: false }  
+    },    
 }
 
 const getters = {

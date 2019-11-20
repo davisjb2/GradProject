@@ -14,6 +14,10 @@ const UserModel = (sequelize, DataTypes) => {
         email: {
             type: DataTypes.STRING(256),
             unique: true
+        },
+        instr: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
         }
     }, {
         sequelize,

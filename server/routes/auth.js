@@ -9,6 +9,20 @@ router.use('/', (req, res, next) => {
     next()
 })
 
+router.post('/instrConfirm', async (req, res) => {
+    try {
+        const user = await User.findByPk(req.user.id)
+        if(user == null || user == undefined)
+        {
+            throw new Error(`No User with id ${req.user.id}`)
+        }
+        await user.update({ instr: true })
+        return res.status(200).send({ status: 200, result: undefined})
+    } catch (e) {
+        return res.status(200).send({ status: 500, result: undefined, error: e.message })
+    }
+})
+
 router.post('/register', async (req, res) => {
     try {
         const user = await User.create(req.body)

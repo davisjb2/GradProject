@@ -73,7 +73,8 @@ export default {
   },
   computed: {
     ...mapGetters('user', [
-      'loggedIn'
+      'loggedIn',
+      'getUser'
     ]),
     ...mapGetters('application', [
       'getErrors'

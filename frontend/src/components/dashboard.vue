@@ -31,6 +31,7 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
 import tabs from 'vue-tabs-with-active-line';
 import tasks from './tasks'
 import tasksMove from './tasksMove'
@@ -53,7 +54,36 @@ export default {
   methods: {
     changeTabs(newTab) {
         this.currentTab = newTab
-    }
+    },
+    ...mapActions('user', [
+      'instrConfirm'
+    ]),
+    alertCustom() {
+        this.$buefy.dialog.alert({
+            title: 'Title Alert',
+            message: 'I have a title, a custom button and <b>HTML</b>!',
+            confirmText: 'Cool!',
+            onConfirm: () => {
+              this.instrConfirm()
+                .then(() => {
+                }).catch((e) => {
+                  // eslint-disable-next-line
+                  console.error(e)
+                })
+            }
+        })
+        
+      }
+  },
+  computed: {
+      ...mapGetters('user', [
+      'getUser'
+    ]),
+  },
+  mounted() {
+    console.log("Mounted")
+    console.log(this.getUser)
+    if(!this.getUser.instr) this.alertCustom()
   }
 }
 </script>

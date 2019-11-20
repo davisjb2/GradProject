@@ -4,7 +4,7 @@ const Label = sequelize.models.Label
 
 seed = async () => {
     try {
-        const user = await User.create({ email: 'user', password: 'pass'})
+        const user = await User.create({ email: 'user', password: 'pass', instr: 'true'})
         const label1 = await Label.create({ name: '', color: '#b5e37e' })
         await user.addLabel(label1)
         const label2 = await Label.create({ name: '', color: '#7db9ec' })
