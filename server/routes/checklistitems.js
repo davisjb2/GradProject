@@ -12,6 +12,23 @@ router.use('/', (req, res, next) => {
     }
 })
 
+router.get('/:id', async (req, res) => {
+    try {
+        const task = await Task.scope('checklist').findByPk(req.params.id)
+        console.log("TSK ", task)
+        var checklist = task.ChecklistItems
+        console.log(checklist)
+        if(checklist == null || checklist == undefined)
+        {
+            checklist = []
+        }
+        
+        return res.status(200).send({ status: 200, result: checklist })
+    } catch (e) {
+        return res.status(200).send({ status: 500, result: undefined, error: e.message})
+    }
+})
+
 router.post('/create/:id', async (req, res) => {
     try {
         const task = await Task.findByPk(req.params.id)
@@ -30,8 +47,13 @@ router.post('/update/:id', async (req, res) => {
         {
             throw new Error(`No checklistItem with id ${req.params.id}`)
         }
+<<<<<<< HEAD
         const task2 = await Task.scope('checklist').findByPk(req.params.id)
         return res.status(200).send({ status: 200, result: task2 })
+=======
+        checklistItem.update(req.body)
+        return res.status(200).send({ status: 200, result: checklistItem })
+>>>>>>> checklists
     } catch (e) {
         return res.status(200).send({ status: 500, result: undefined, error: e.message})
     }

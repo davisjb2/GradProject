@@ -35,7 +35,8 @@ Task.addScope('labels', {
     ]
 })
 
-ChecklistItem.hasOne(Task)
+Task.hasMany(ChecklistItem)
+ChecklistItem.belongsTo(Task)
 
 Task.addScope('checklist', {
     include: [

@@ -22,8 +22,31 @@
                       type="textarea"
                       v-model="task.description">
                   </b-input>
-                </b-field> 
+                </b-field>
               <b-checkbox v-model="task.completed">Completed?</b-checkbox>
+              <div v-if="checklistShow" class="checklist">
+                <h4>Checklist</h4>
+                <hr>
+                <checklistItem v-for="(item, i) in checklist" :key="i" :todo="item"></checklistItem>
+                <div class="level">
+                  <div class="level-left">
+                      <div class="level-item">
+                        <b-input
+                                    type="text"
+                                    auto-grow
+                                    v-model="newItem">
+                        </b-input>
+                      </div>
+                  </div>
+                  <div class="level-right">
+                        <div class="level-item">
+                            <button class="button is-info" @click="newChecklistItem">
+                                <font-awesome-icon icon="save"/>
+                            </button>
+                        </div>
+                  </div>
+              </div>
+              </div>
             </div>
             <div class="column">
                 <div class="labels">
@@ -32,7 +55,11 @@
                       {{ label.name }}
                   </b-checkbox>
                 </div>
+<<<<<<< HEAD
                 <button class="button" type="button" @click="createChecklist">Add Checklist</button>
+=======
+                <button v-if="!checklistShow" class="button" type="button" @click="createChecklist">Add Checklist</button>
+>>>>>>> checklists
               </div>
             </div>
         </section>
@@ -44,14 +71,21 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
+import checklistItem from './checklistItem'
 export default {
   name: 'edit',
   props: ['task'],
   data() {
     return {
       labels: [],
-      labelsGroup: []
+      labelsGroup: [],
+      checklistShow: false,
+      newItem: "",
+      checklist: []
     }
+  },
+  components: {
+    checklistItem
   },
   methods: {
     ...mapActions('task', [
@@ -60,6 +94,10 @@ export default {
     ...mapActions('label', [
       'loadLabels'
     ]),
+    ...mapActions('checklistItem', [
+      'loadChecklist',
+      'createChecklistItem'
+    ]),    
     edit () {
       const data = { task: this.task, labels: this.labelsGroup }
       this.updateTask(data)
@@ -71,17 +109,39 @@ export default {
         })
     },
     createChecklist() {
-      
+      this.checklistShow = true
+    },
+    newChecklistItem() {
+      var data = {}
+      var item = {
+        name: this.newItem,
+        completed: false,
+        order: this.checklist.length
+      }
+      data.checklist_item = item
+      data.id = this.task.id
+      this.createChecklistItem(data)
+        .then(() => {
+          this.newItem = ""
+        }).catch((e) => {
+          console.error(e)
+        })
     }
   },
   computed: {
     ...mapGetters('label', [
       'getLabels'
-    ])
+    ]),
+   ...mapGetters('checklistItem', [
+      'getChecklist'
+    ])        
   },
   watch: {
     getLabels() {
       this.labels = JSON.parse(JSON.stringify(this.getLabels))
+    },
+    getChecklist() {
+      this.checklist = JSON.parse(JSON.stringify(this.getChecklist))
     }
   },
   mounted() {
@@ -92,6 +152,10 @@ export default {
       {
         this.labelsGroup.push(this.task.Labels[i].id)
       }
+      this.loadChecklist(this.task.id).then(() => {
+        this.checklist = JSON.parse(JSON.stringify(this.getChecklist))
+      })
+      if(this.getChecklist.length > 0) this.checklistShow = true
   }
 }
 </script>
@@ -99,9 +163,9 @@ export default {
 
 <style scoped>
 .modal-card {
-    width:30vw;
-    height:50vh;
-    border-radius: 8px;
+  width:40vw;
+  height:70vh;
+  border-radius: 8px;
 }
 .labels .check {
   border: none !important;
@@ -109,8 +173,25 @@ export default {
 }
 
 .labels .checkbox {
-    display: flex !important;
-    margin-left: 0 !important;
-    margin-bottom: 10px;
+  display: flex !important;
+  margin-left: 0 !important;
+  margin-bottom: 10px;
+}
+
+h4 {
+  font-size: 1rem!important;
+  text-align: left;
+  margin-bottom: 0
+}
+
+hr {
+  margin: .25rem 0px 1rem 0px;
+}
+
+.checklist {
+  border: 1px solid #dbdbdb;
+  border-radius: 5px;
+  padding: 8px;
+  margin-top: 3px;
 }
 </style>

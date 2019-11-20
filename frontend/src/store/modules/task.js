@@ -41,7 +41,6 @@ const actions = {
     // eslint-disable-next-line    
     async updateTask ({ commit }, data) {
         const taskResult = await axios.post(`/tasks/update/${data.task.id}`, data.task)
-        console.log(taskResult)
         const labelsResult = await axios.post(`/tasks/updateLabels/${taskResult.data.result.id}`, data.labels)
         if(labelsResult.data.status == 200 && taskResult.data.status == 200)
         {

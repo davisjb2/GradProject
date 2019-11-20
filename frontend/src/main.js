@@ -8,10 +8,16 @@ import axios from 'axios'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons'
+import { faEdit } from '@fortawesome/free-solid-svg-icons'
+import { faSave } from '@fortawesome/free-solid-svg-icons'
+import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 library.add(faChevronLeft)
 library.add(faChevronRight)
+library.add(faEdit)
+library.add(faSave)
+library.add(faTrash)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
