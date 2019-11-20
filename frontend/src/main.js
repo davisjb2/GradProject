@@ -11,6 +11,7 @@ import { faChevronRight } from '@fortawesome/free-solid-svg-icons'
 import { faEdit } from '@fortawesome/free-solid-svg-icons'
 import { faSave } from '@fortawesome/free-solid-svg-icons'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
+import { faCheck } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 library.add(faChevronLeft)
@@ -18,6 +19,7 @@ library.add(faChevronRight)
 library.add(faEdit)
 library.add(faSave)
 library.add(faTrash)
+library.add(faCheck)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 

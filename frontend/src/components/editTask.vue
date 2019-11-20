@@ -24,29 +24,6 @@
                   </b-input>
                 </b-field>
               <b-checkbox v-model="task.completed">Completed?</b-checkbox>
-              <div v-if="checklistShow" class="checklist">
-                <h4>Checklist</h4>
-                <hr>
-                <checklistItem v-for="(item, i) in checklist" :key="i" :todo="item"></checklistItem>
-                <div class="level">
-                  <div class="level-left">
-                      <div class="level-item">
-                        <b-input
-                                    type="text"
-                                    auto-grow
-                                    v-model="newItem">
-                        </b-input>
-                      </div>
-                  </div>
-                  <div class="level-right">
-                        <div class="level-item">
-                            <button class="button is-info" @click="newChecklistItem">
-                                <font-awesome-icon icon="save"/>
-                            </button>
-                        </div>
-                  </div>
-              </div>
-              </div>
             </div>
             <div class="column">
                 <div class="labels">
@@ -56,8 +33,34 @@
                   </b-checkbox>
                 </div>
                 <button v-if="!checklistShow" class="button" type="button" @click="createChecklist">Add Checklist</button>
-              </div>
             </div>
+          </div>
+          <div>
+                <div v-if="checklistShow" class="checklist">
+                  <h4>Checklist</h4>
+                  <hr>
+                  <checklistItem v-for="(item, i) in checklist" :key="i" :todo="item"></checklistItem>
+                  <div class="level">
+                    <div class="level-left widthfull">
+                        <div class="level-item widthfull">
+                          <b-input
+                                      type="text"
+                                      auto-grow
+                                      v-model="newItem"
+                                      class="widthfull">
+                          </b-input>
+                        </div>
+                    </div>
+                    <div class="level-right">
+                          <div class="level-item">
+                              <button class="button is-info" @click="newChecklistItem">
+                                  <font-awesome-icon icon="save"/>
+                              </button>
+                          </div>
+                    </div>
+                </div>
+              </div>
+          </div>
         </section>
         <footer class="modal-card-foot">
             <button class="button" type="button" @click="edit">Save</button>
@@ -189,5 +192,9 @@ hr {
   border-radius: 5px;
   padding: 8px;
   margin-top: 3px;
+}
+
+.widthfull {
+  width: 100%;
 }
 </style>

@@ -1,14 +1,20 @@
 <template>
   <div class="level">
-      <div class="level-left">
+      <div class="level-left widthfull">
           <div class="level-item">
+                <button class="button is-info" @click="complete()">
+                    <font-awesome-icon icon="check"/>
+                </button>
+          </div>
+          <div class="level-item widthfull">
             <b-input
                         type="text"
                         v-bind:class = "[todo.completed ? 'is-done' : '']"
                         @keydown.enter.prevent = "save"
                         @dblclick= "edit"
                         auto-grow :disabled="isReadOnly"
-                        v-model="todo.name">
+                        v-model="todo.name"
+                        class="widthfull">
             </b-input>
           </div>
       </div>
@@ -75,6 +81,16 @@ export default {
           }).catch((e) => {
             console.error(e)
           })      
+    },
+    complete() {
+      this.todo.completed = !this.todo.completed
+      data = this.todo
+        this.updateChecklistItem(data)
+          .then(() => {
+            this.isReadOnly = true
+          }).catch((e) => {
+            console.error(e)
+          })
     }
   }
 }
@@ -91,5 +107,9 @@ export default {
 
 .level-item {
   flex-shrink: 1 !important;
+}
+
+.widthfull {
+  width: 100%;
 }
 </style>
