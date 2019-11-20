@@ -47,13 +47,8 @@ router.post('/update/:id', async (req, res) => {
         {
             throw new Error(`No checklistItem with id ${req.params.id}`)
         }
-<<<<<<< HEAD
-        const task2 = await Task.scope('checklist').findByPk(req.params.id)
-        return res.status(200).send({ status: 200, result: task2 })
-=======
         checklistItem.update(req.body)
         return res.status(200).send({ status: 200, result: checklistItem })
->>>>>>> checklists
     } catch (e) {
         return res.status(200).send({ status: 500, result: undefined, error: e.message})
     }
