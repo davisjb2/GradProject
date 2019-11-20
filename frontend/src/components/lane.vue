@@ -36,9 +36,14 @@ export default {
       doChange (evt) {
          if(evt.added) {
             const data = evt.added.element
-            data.assignedDate= new Date(this.id)
+            data.assignedDate = new Date(this.id)
+            if((new Date(data.assignedDate)).setHours(0,0,0,0) < (new Date()).setHours(0,0,0,0))
+            {
+                data.assignedDate = -1
+            }
             this.updateTaskMove(data)
                 .then(() => {
+                    
                 }).catch((e) => {
                 // eslint-disable-next-line
                 console.error(e)
