@@ -1,5 +1,5 @@
 <template>
-    <div class="modal-card" style="width: auto">
+    <div class="modal-card">
         <header class="modal-card-head">
             <p class="modal-card-title">New Task</p>
         </header>
@@ -32,7 +32,11 @@
                       {{ label.name }}
                   </b-checkbox>
                 </div>
+                <b-tooltip label="Checklists will be enabled when the task is created." multilined>
+                  <button class="button" disabled type="button">Add Checklist</button>
+                </b-tooltip>
               </div>
+
           </div>
         </section>
         <footer class="modal-card-foot">
@@ -100,9 +104,9 @@ export default {
 
 <style>
 .modal-card {
-    width:30vw;
-    height:50vh;
-    border-radius: 8px;
+  width:40vw;
+  height:70vh;
+  border-radius: 8px;
 }
 
 .labels .check {
