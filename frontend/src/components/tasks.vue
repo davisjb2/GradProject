@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="container">
-            <FullCalendar defaultView="dayGridMonth" eventTextColor="purple" eventColor="white" :editable="true" @eventDrop="changeDueDate" @eventClick="edit" :eventLimit="true" :aspectRatio="1.45" :buttonText="{ dayGridMonth: 'Month', dayGridWeek: 'Week', listMonth: 'List', today: 'Today'}" :events="taskData" :header="{ left: 'listMonth, today', center: 'prev title next', right: 'dayGridMonth, dayGridWeek' }" :plugins="calendarPlugins" />
+            <FullCalendar defaultView="dayGridMonth" eventTextColor="purple" eventColor="white" :editable="true" @eventDrop="changeDueDate" @eventClick="edit" :eventLimit="true" :aspectRatio="1.45" :buttonText="{ dayGridMonth: 'Month', dayGridWeek: 'Week', listMonth: 'List', today: 'Today'}" :customButtons="{ createTaskButton: { text: 'Create', click: create} }" :events="taskData" :header="{ left: 'createTaskButton, today', center: 'prev title next', right: 'dayGridMonth, dayGridWeek' }" :plugins="calendarPlugins" />
         </div>
 
          <b-modal :active.sync="modalActive" has-modal-card>
