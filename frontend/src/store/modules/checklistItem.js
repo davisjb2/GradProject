@@ -10,10 +10,6 @@ const mutations = {
         var index = state.checklist.findIndex(e => e.id === data.id)
         Vue.set(state.checklist, index, data)
     },
-    'DELETE_CHECKLISTITEM' (state, data) {
-        var index = state.checklist.findIndex(e => e.id === data.id)
-        Vue.delete(state.checklist, index)
-    },    
     'CREATE_CHECKLIST' (state, data) {
         state.checklist.push(data)
     },    
@@ -36,11 +32,12 @@ const actions = {
         commit('application/ERROR', 'Error updating checklist')
         return { success: false }  
     },
-    async deleteChecklistItem ({ commit }, id) {
-        const clResult = await axios.post(`/checklistitems/delete/${id}`)
+    async deleteChecklistItem ({ commit }, data) {
+        await axios.post(`/checklistitems/delete/${data.id}`)
+        const clResult = await axios.get(`/checklistitems/${data.TaskId}`)
         if(clResult.data.status == 200)
         {
-            commit('DELETE_CHECKLISTITEM', id)
+            commit('LOAD_CHECKLIST', clResult.data.result)
             return { success: true }
         }
         // eslint-disable-next-line

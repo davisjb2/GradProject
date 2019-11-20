@@ -74,7 +74,7 @@ export default {
       }
     },
     deleteItem() {
-      const data = this.todo.id
+      const data = this.todo
         this.deleteChecklistItem(data)
           .then(() => {
             
@@ -84,7 +84,7 @@ export default {
     },
     complete() {
       this.todo.completed = !this.todo.completed
-      data = this.todo
+      const data = this.todo
         this.updateChecklistItem(data)
           .then(() => {
             this.isReadOnly = true
