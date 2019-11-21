@@ -60,8 +60,8 @@ export default {
     ]),
     alertCustom() {
         this.$buefy.dialog.alert({
-            title: 'Welcome!',
-            message: 'Just a few helpful hints before you get started: ',
+            title: 'Welcome! Just a few tips before you get started:',
+            message: '<p>This planner offers you the ability to keep track of when you will work on your assignments while still keeping track of when they are due.</p><br><p>There are two dashboards you\'ll interact with: <b>Calendar</b> and <b>To Do Plan</b></p><br><h3><b>Calendar</b></h3><hr style="margin: .5rem 0"><p>The calendar will show your tasks on their due dates. You can drag and drop them around the calendar to change the due date.</p><br><h3><b>To Do Plan</b></h3><hr style="margin: .5rem 0"><p>The to do plan is where you will plan out when you will work on your tasks! After a task is created, it will show in the "Unassigned" section of the to do plan. You can then drag the task over to the day you plan to do it. If the day passes and the task isn\'t marked as completed it will be moved into the "Missed" section of the to do plan.</p>',
             confirmText: 'Get Started!',
             trapFocus: true,
             onConfirm: () => {
@@ -86,7 +86,6 @@ export default {
   }
 }
 </script>
-
 
 <style>
 .tabs {
@@ -144,5 +143,11 @@ export default {
   border-radius: 10px;
   background-color: #009688;
   transition: transform 0.4s ease, width 0.4s ease;
+}
+
+.modal-card {
+  width: 50vw !important;
+  height: 80vh !important;
+  max-width: 50vw !important;
 }
 </style>
