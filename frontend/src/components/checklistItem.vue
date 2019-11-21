@@ -2,8 +2,11 @@
   <div class="level">
       <div class="level-left widthfull">
           <div class="level-item">
-                <button class="button is-info" @click="complete()">
-                    <font-awesome-icon icon="check"/>
+                <button class="button is-info" @click="complete()" v-if="todo.completed">
+                    <font-awesome-icon :icon="[`far`, `check-square`]"/>
+                </button>                                
+                <button class="button is-info" @click="complete()" v-else>
+                    <font-awesome-icon :icon="[`far`, `square`]"/>
                 </button>
           </div>
           <div class="level-item widthfull">
