@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="task-card" @click="edit">
+    <div class="task-card">
         <div class="task-container">
               <div class="columns" style="margin: 0">
                 <div class="column label-bar" v-for="(label,i) in task.Labels" :key="i" :style="{ background: label.color, padding: 0 }">
@@ -12,43 +12,15 @@
             <small>{{ task.dueDate | formatDate }}</small>
         </div>
     </div>
-
-    <b-modal :active.sync="modalEditActive" has-modal-card>
-        <edit-task v-bind="formProps"></edit-task>
-    </b-modal>  
   </div>  
 </template>
 
 <script>
-import editTask from '../components/editTask'
 export default {
   name: 'card',
   props: [
       'task'
-  ],
-  data() {
-            return {
-                modalEditActive: false,
-                formProps: {
-                    task: {
-                        id: 0,
-                        dueDate: '',
-                        name: '',
-                        completed: false
-                    }                    
-                }
-            }
-  },
-  components: {
-    editTask
-  },
-  methods: {
-    edit() {
-        this.formProps.task = this.task;
-        this.formProps.task.dueDate = new Date(this.formProps.task.dueDate)
-        this.modalEditActive = true;
-    }
-  }
+  ]
 }
 </script>
 
