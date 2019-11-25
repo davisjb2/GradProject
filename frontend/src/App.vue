@@ -44,6 +44,13 @@
         </template>
     </b-navbar>
     <router-view></router-view>
+    <b-navbar class="nav-marg">
+      <template slot="end">
+        <b-navbar-item tag="div" class="text-white">
+          <p>Designed and Made By Brooke Tibbett</p>
+        </b-navbar-item>
+      </template>
+    </b-navbar>
   </div>
 </template>
 
@@ -127,5 +134,13 @@ export default {
 
 .navbar-item img {
   max-height: 5rem;
+}
+
+.nav-marg {
+  margin-top: 15px;
+}
+
+.text-white {
+  color:white;
 }
 </style>
