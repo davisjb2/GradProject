@@ -77,12 +77,12 @@ router.post('/update/:id', async (req, res) => {
 
 router.post('/delete/:id', async (req, res) => {
     try {
-        const task = await Task.findByPk(id)
+        const task = await Task.findByPk(req.params.id)
         if(task == null || task == undefined)
         {
             throw new Error(`No Task with id ${id}`)
         }
-        if(req.user.id == task.getUser().id)
+        if(req.user.id == task.UserId)
         {
             await task.destroy()
         }

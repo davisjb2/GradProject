@@ -74,7 +74,7 @@ const actions = {
             return { success: true }
         }
         // eslint-disable-next-line
-        console.log("Error deleting task")
+        console.log("Error deleting task", taskResult)
         commit('application/ERROR', 'Error deleting task')
         return { success: false }  
     },

@@ -64,6 +64,7 @@
         </section>
         <footer class="modal-card-foot">
             <button class="button" type="button" @click="edit">Save</button>
+            <button class="button danger" type="button" @click="deleteTaskItem">Delete</button>
         </footer>
     </div>
 </template>
@@ -88,7 +89,9 @@ export default {
   },
   methods: {
     ...mapActions('task', [
-      'updateTask'
+      'updateTask',
+      'deleteTask',
+      'loadTasks'
     ]),
     ...mapActions('label', [
       'loadLabels'
@@ -104,6 +107,22 @@ export default {
           this.$parent.close()
         }).catch((e) => {
           // eslint-disable-next-line
+          console.error(e)
+        })
+    },
+    deleteTaskItem () {
+      const data = this.task.id
+      this.deleteTask(data)
+        .then(() => {
+          this.$parent.close()
+        }).catch((e) => {
+          // eslint-disable-next-line
+          console.error(e)
+        })
+      this.loadTasks()
+        .then(() => {
+
+        }).catch((e) => {
           console.error(e)
         })
     },
@@ -196,5 +215,9 @@ hr {
 
 .widthfull {
   width: 100%;
+}
+
+.modal-card-body {
+  padding-top: 40px;
 }
 </style>

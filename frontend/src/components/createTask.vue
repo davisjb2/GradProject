@@ -124,4 +124,7 @@ button.is-success {
   background: rgb(181, 227, 126) !important;
 }
 
+.modal-card-body {
+  padding-top: 40px;
+}
 </style>

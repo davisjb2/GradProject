@@ -40,7 +40,6 @@ export default {
     submit () {
       const data = this.user
       // eslint-disable-next-line
-      console.log(JSON.stringify(data, null, 2))
       this.login(data)
         .then((res) => {
           this.$router.push({ name: 'dashboard' })

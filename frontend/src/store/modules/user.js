@@ -44,7 +44,7 @@ const actions = {
         }
         // eslint-disable-next-line
         console.log('error creating account', userResult)
-        commit('application/ERROR', userResult.data.error)
+        commit('application/ERROR')
         return { success: false }
     },
     async login ({ commit }, user) {
@@ -56,7 +56,7 @@ const actions = {
         }
         // eslint-disable-next-line
         console.log('error logging in', userResult)
-        commit('application/ERROR', userResult.data.error)
+        commit('application/ERROR')
         return { success: false }
     },
     async logout ({ commit }) {
@@ -68,7 +68,7 @@ const actions = {
         }
         // eslint-disable-next-line
         console.log('error logging out', userResult)
-        commit('application/ERROR', userResult.data.error)
+        commit('application/ERROR')
         return { success: false }
     },
      // eslint-disable-next-line
@@ -80,7 +80,7 @@ const actions = {
             return { success: true }
         }
         // eslint-disable-next-line
-        console.log("Error updating user", userResult.data.error)
+        console.log("Error updating user")
         commit('application/ERROR', 'Error updating user')
         return { success: false }  
     },
@@ -102,7 +102,7 @@ const actions = {
             return { success: true }
         }
         // eslint-disable-next-line
-        console.log("Error confirming instr for user", userResult.data.error)
+        console.log("Error confirming instr for user")
         commit('application/ERROR', "Error confirming instr for user")
         return { success: false }  
     },    
