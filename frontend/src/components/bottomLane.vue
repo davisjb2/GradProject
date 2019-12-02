@@ -3,29 +3,43 @@
         <h4>{{ title }}</h4>
         <div>
             <draggable class="lane-body card-list" v-model="taskData" :options="{ group: 'default' }" @change="doChange">
-                <div v-for="task in taskData" :key="task.id">
+                <div v-for="task in taskData" :key="task.id" @click="edit(task)">
                     <card :task="task"></card>
                 </div>
             </draggable>
         </div>
+        <b-modal :active.sync="modalEditActive" has-modal-card>
+            <edit-task v-bind="formProps"></edit-task>
+        </b-modal> 
     </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import draggable from 'vuedraggable'
+import editTask from '../components/editTask'
 import card from './card'
 export default {
   name: 'bottomLane',
   data() {
         return {
-            taskData: []
+            taskData: [],
+            formProps: {
+                    task: {
+                        id: 0,
+                        dueDate: '',
+                        name: '',
+                        completed: false
+                    }                    
+            },
+            modalEditActive: false            
         }
   },
   props: [ 'id', 'title' ],
   components: {
       draggable,
-      card
+      card,
+      editTask
   },
   methods: {
       ...mapActions('task', [
@@ -43,7 +57,12 @@ export default {
                 console.error(e)
             })
         }
-      }
+      },
+      edit(task) {
+        this.formProps.task = task;
+        this.formProps.task.dueDate = new Date(this.formProps.task.dueDate)
+        this.modalEditActive = true;
+      }      
   },
   computed: {
     ...mapGetters('task', [
