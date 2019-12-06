@@ -89,7 +89,20 @@ const actions = {
         console.log("Error loading tasks", tasksResult)
         commit('application/ERROR', 'Error loading tasks')
         return { success: false }  
-    }
+    },
+    // eslint-disable-next-line    
+    async copyTask ({ commit }, data) {
+        const taskResult = await axios.post(`/tasks/copy/${data}`)
+        if(taskResult.data.status == 200)
+        {
+            commit('CREATE_TASK', taskResult.data.result)
+            return { success: true }
+        }
+        // eslint-disable-next-line
+        console.log("Error copying task", taskResult.data.error)
+        commit('application/ERROR', 'Error copying task')
+        return { success: false }  
+    }    
 }
 
 const getters = {

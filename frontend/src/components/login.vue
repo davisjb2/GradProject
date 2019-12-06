@@ -11,7 +11,7 @@
           <b-field label="Password" label-position="on-border">
             <b-input type="password" name="password" v-model="user.password"></b-input>
           </b-field>
-          <b-button tag="input" class="button is-info"
+          <b-button tag="input" class="button is-info submitbutton"
                 native-type="submit" @click="submit"
                 value="Submit" />            
         </div>
@@ -56,4 +56,13 @@ export default {
 
 
 <style scoped>
+.submitbutton {
+  box-shadow: inset 0 1px 2px
+  rgba(10, 10, 10, 0.1);
+
+  border-color:
+  #dbdbdb !important;
+
+  border-radius: 4px !important;
+}
 </style>

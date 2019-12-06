@@ -63,8 +63,21 @@
           </div>
         </section>
         <footer class="modal-card-foot">
-            <button class="button" type="button" @click="edit">Save</button>
-            <button class="button danger" type="button" @click="deleteTaskItem">Delete</button>
+            <div class="level">
+              <div class="level-left">
+                <div class="level-item">
+                  <button class="button is-success" type="button" @click="edit">Save</button>
+                </div>
+              </div>
+              <div class="level-right">
+                <div class="level-item">
+                  <button class="button" type="button" @click="copyTaskItem">Copy</button>
+                </div>
+                <div class="level-item">
+                  <button class="button is-danger" type="button" @click="deleteTaskItem">Delete</button>
+                </div>                
+              </div>
+            </div>
         </footer>
     </div>
 </template>
@@ -91,7 +104,8 @@ export default {
     ...mapActions('task', [
       'updateTask',
       'deleteTask',
-      'loadTasks'
+      'loadTasks',
+      'copyTask'
     ]),
     ...mapActions('label', [
       'loadLabels'
@@ -126,6 +140,22 @@ export default {
           console.error(e)
         })
     },
+    copyTaskItem () {
+      const data = this.task.id
+      this.copyTask(data)
+        .then(() => {
+          this.$parent.close()
+        }).catch((e) => {
+          // eslint-disable-next-line
+          console.error(e)
+        })
+      this.loadTasks()
+        .then(() => {
+
+        }).catch((e) => {
+          console.error(e)
+        })
+    },    
     createChecklist() {
       this.checklistShow = true
     },
@@ -219,5 +249,17 @@ hr {
 
 .modal-card-body {
   padding-top: 40px;
+}
+
+.modal-card-foot {
+  display: block;
+}
+
+.is-danger {
+  background-color: #ff00004f !important;
+}
+
+.is-success {
+  background-color: rgb(181, 227, 126) !important;
 }
 </style>
