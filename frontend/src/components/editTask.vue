@@ -149,12 +149,6 @@ export default {
           // eslint-disable-next-line
           console.error(e)
         })
-      this.loadTasks()
-        .then(() => {
-
-        }).catch((e) => {
-          console.error(e)
-        })
     },    
     createChecklist() {
       this.checklistShow = true
