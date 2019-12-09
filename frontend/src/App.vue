@@ -44,7 +44,7 @@
         </template>
     </b-navbar>
     <router-view></router-view>
-    <b-navbar class="nav-marg">
+    <b-navbar>
       <template slot="end">
         <b-navbar-item tag="div" class="text-white">
           <p>Designed and Made By Brooke Tibbett</p>
