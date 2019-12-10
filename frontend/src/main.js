@@ -15,6 +15,7 @@ import { faCheck } from '@fortawesome/free-solid-svg-icons'
 import { faSquare } from '@fortawesome/free-regular-svg-icons'
 import { faCheckSquare } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import VueConfetti from 'vue-confetti'
 
 library.add(faChevronLeft)
 library.add(faChevronRight)
@@ -31,6 +32,7 @@ axios.defaults.baseURL = process.env.VUE_APP_URL
 axios.defaults.withCredentials = true
 
 Vue.use(Buefy)
+Vue.use(VueConfetti)
 
 Vue.config.productionTip = false
 

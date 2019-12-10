@@ -134,4 +134,8 @@ h4 {
     text-align: left;
     padding-left: 8px;
 }
+
+.modal-background {
+  background-color: rgba(10, 10, 10, 0.69) !important;
+}
 </style>

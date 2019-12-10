@@ -23,7 +23,7 @@
                       v-model="task.description">
                   </b-input>
                 </b-field>
-              <b-checkbox v-model="task.completed">Completed?</b-checkbox>
+              <b-checkbox v-model="task.completed" @input="celebrate(task.completed)">Completed?</b-checkbox>
             </div>
             <div class="column">
                 <div class="labels">
@@ -168,6 +168,24 @@ export default {
         }).catch((e) => {
           console.error(e)
         })
+    },
+    celebrate(t) {
+      if(t) {
+        this.$confetti.start({
+          defaultSize: 15,
+          particles: [
+            {
+              type: 'rect'
+            }
+          ]
+        })
+        setTimeout(() => {
+          this.$confetti.stop()
+        }, 3000)
+      }
+      else {
+        this.$confetti.stop()
+      }
     }
   },
   computed: {
